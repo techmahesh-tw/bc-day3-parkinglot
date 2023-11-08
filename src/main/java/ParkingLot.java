@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class ParkingLot {
@@ -6,6 +8,8 @@ public class ParkingLot {
     private static final int MAX_CAPACITY = 1;
 
     private final Set<Car> parkedCars = new HashSet<>();
+
+    private final List<Notification> notifications = new ArrayList<>();
 
     public boolean park(Car car) throws ParkingFullException {
         if (!checkSlotAvailability()) {
@@ -15,7 +19,9 @@ public class ParkingLot {
 
         // Notify the owner if parking is full
         if (parkedCars.size() == MAX_CAPACITY) {
-            new Owner().notify("Parking Lot full");
+            for (Notification observer : notifications) {
+                observer.notify("Parking Lot full");
+            }
         }
         return true;
     }
@@ -30,5 +36,9 @@ public class ParkingLot {
 
     private boolean checkSlotAvailability() {
         return parkedCars.size() < MAX_CAPACITY;
+    }
+
+    public void addObserver(Notification observer) {
+        notifications.add(observer);
     }
 }

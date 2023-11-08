@@ -43,7 +43,10 @@ class ParkingLotTest {
     }
 
     @Test
-    void shouldNotifyOwnerIfParkingFull() throws ParkingFullException {
+    void shouldNotifyOwnerAndSecurityIfParkingFull() throws ParkingFullException {
+        ParkingLot parkingLot = new ParkingLot();
+        parkingLot.addObserver(new Owner());
+        parkingLot.addObserver(new Security());
         Car car = new Car("123");
         Assertions.assertTrue(new ParkingLot().park(car));
     }
