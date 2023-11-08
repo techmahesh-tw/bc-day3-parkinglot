@@ -6,34 +6,45 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class ParkingLotTest {
 
     @Test
-    void shouldParkMyCar() {
+    void shouldParkMyCar() throws ParkingFullException {
         Car car = new Car("123");
         Assertions.assertTrue(new ParkingLot().park(car));
     }
 
     @Test
-    void shouldNotParkMyCarDueToUnavailability() {
+    void shouldNotParkMyCarDueToUnavailability() throws ParkingFullException {
         ParkingLot parkingLot = new ParkingLot();
-        Assertions.assertTrue(parkingLot.park(new Car("1234")));
+        Car car = new Car("1234");
+        Assertions.assertTrue(parkingLot.park(car));
 
         Car secondCar = new Car("12345");
-        Assertions.assertFalse(parkingLot.park(secondCar));
+        assertThrows(ParkingFullException.class,
+                () -> {
+                    parkingLot.park(secondCar);
+                });
     }
 
     @Test
-    void shouldUnparkCar() throws CarNotFoundException {
+    void shouldUnparkCar() throws CarNotFoundException, ParkingFullException {
+        ParkingLot parkingLot = new ParkingLot();
         Car car = new Car("123");
-        Assertions.assertTrue(new ParkingLot().park(car));
+        Assertions.assertTrue(parkingLot.park(car));
 
-        Assertions.assertTrue(new ParkingLot().unpark(car));
+        Assertions.assertTrue(parkingLot.unpark(car));
     }
 
     @Test
     void shouldThrowExceptionIfTheCarIsNotParked() {
         Car car = new Car("123");
         assertThrows(CarNotFoundException.class,
-                ()->{
+                () -> {
                     new ParkingLot().unpark(car);
                 });
+    }
+
+    @Test
+    void shouldNotifyOwnerIfParkingFull() throws ParkingFullException {
+        Car car = new Car("123");
+        Assertions.assertTrue(new ParkingLot().park(car));
     }
 }
