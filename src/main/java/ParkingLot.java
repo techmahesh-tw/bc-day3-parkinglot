@@ -3,12 +3,15 @@ import java.util.List;
 
 public class ParkingLot {
 
-    private final int capacity;
+    private final static int MAX_CAPACITY = 1;
 
-    private static final List<Car> parkedCars = new ArrayList<>();
+    private List<Car> parkedCars;
 
-    public ParkingLot(int capacity) {
-        this.capacity = capacity;
+    public ParkingLot() {
+
+    }
+    public ParkingLot(List<Car> parkedCars) {
+        this.parkedCars = parkedCars;
     }
 
     public boolean park(Car car) {
@@ -20,6 +23,6 @@ public class ParkingLot {
     }
 
     private boolean checkSlotAvailability() {
-        return parkedCars.size() < capacity;
+        return parkedCars.size() < MAX_CAPACITY;
     }
 }
