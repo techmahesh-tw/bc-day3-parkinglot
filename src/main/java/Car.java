@@ -1,6 +1,8 @@
 public class Car extends ParkingLot {
 
-    public Car() {
-        super();
+    private String vehicleNo;
+
+    public Car(String vehicleNo) {
+        this.vehicleNo = vehicleNo;
     }
 }
