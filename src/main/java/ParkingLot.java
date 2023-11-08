@@ -15,6 +15,14 @@ public class ParkingLot {
         return false;
     }
 
+    public boolean unpark(Car car) throws CarNotFoundException {
+        if(!parkedCars.contains(car)) {
+            throw new CarNotFoundException("Car not parked in the parking area");
+        }
+        parkedCars.remove(car);
+        return true;
+    }
+
     private boolean checkSlotAvailability() {
         return parkedCars.size() < MAX_CAPACITY;
     }
