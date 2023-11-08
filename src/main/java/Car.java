@@ -1,8 +1,6 @@
-public class Car implements ParkingArea {
+public class Car extends ParkingLot {
 
-    @Override
-    public boolean park() {
-        System.out.println("Car is parked");
-        return true;
-    }
+public Car(){
+
+}
 }
