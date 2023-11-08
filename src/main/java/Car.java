@@ -1,7 +1,8 @@
-public class CarParking {
+public class Car implements ParkingArea {
 
-
-    public void park() {
-
+    @Override
+    public boolean park() {
+        System.out.println("Car is parked");
+        return true;
     }
 }

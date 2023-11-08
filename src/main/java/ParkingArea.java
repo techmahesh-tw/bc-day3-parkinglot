@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public class ParkingArea {
+public interface ParkingArea{
+
+    boolean park();
+
 }

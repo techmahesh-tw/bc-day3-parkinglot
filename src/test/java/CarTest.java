@@ -1,9 +1,10 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class CarParkingTest {
+class CarTest {
 
     @Test
-    void shouldParkMyCar(){
-        new CarParking().park();
+    void shouldParkMyCar() {
+        Assertions.assertTrue(new Car().park());
     }
 }
