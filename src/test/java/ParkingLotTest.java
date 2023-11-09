@@ -50,4 +50,15 @@ class ParkingLotTest {
         Car car = new Car("123");
         Assertions.assertTrue(new ParkingLot().park(car));
     }
+
+    @Test
+    void shouldNotifyOwnerAndSecurityIfParkingIsAvailable() throws CarNotFoundException, ParkingFullException {
+        ParkingLot parkingLot = new ParkingLot();
+        parkingLot.addObserver(new Owner());
+        parkingLot.addObserver(new Security());
+        Car car = new Car("123");
+
+        Assertions.assertTrue(parkingLot.park(car));
+        Assertions.assertTrue(parkingLot.unpark(car));
+    }
 }

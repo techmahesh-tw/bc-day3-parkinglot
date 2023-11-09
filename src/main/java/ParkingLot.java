@@ -31,6 +31,13 @@ public class ParkingLot {
             throw new CarNotFoundException("Car not parked in the parking area");
         }
         parkedCars.remove(car);
+
+        // Notify the owner if the parking area is available
+        if (parkedCars.size() == (MAX_CAPACITY-1)) {
+            for (Notification observer : notifications) {
+                observer.notify("Parking Lot is Available");
+            }
+        }
         return true;
     }
 
