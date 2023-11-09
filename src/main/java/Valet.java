@@ -10,8 +10,8 @@ public class Valet {
     }
 
     public boolean park(Car car) throws ParkingFullException {
-        Optional<ParkingLot> parkinglot = parkingLots.stream().filter(item -> item.isSlotAvailable()).findFirst();
-        if (!parkinglot.isPresent()) {
+        Optional<ParkingLot> parkinglot = parkingLots.stream().filter(ParkingLot::isSlotAvailable).findFirst();
+        if (parkinglot.isEmpty()) {
             throw new ParkingFullException("Parking full");
         }
         return parkinglot.get().park(car);
