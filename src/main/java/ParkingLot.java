@@ -5,20 +5,30 @@ import java.util.Set;
 
 public class ParkingLot {
 
-    private static final int MAX_CAPACITY = 1;
+    private int id;
+    private int maxCapacity;
 
-    private final Set<Car> parkedCars = new HashSet<>();
+    private Set<Car> parkedCars;
+
+    public ParkingLot() {
+    }
+
+    public ParkingLot(int id, int maxCapacity) {
+        this.id = id;
+        this.maxCapacity = maxCapacity;
+        parkedCars = new HashSet<>();
+    }
 
     private final List<Notification> notifications = new ArrayList<>();
 
     public boolean park(Car car) throws ParkingFullException {
-        if (!checkSlotAvailability()) {
+        if (!isSlotAvailable()) {
             throw new ParkingFullException("Parking Lot full already");
         }
         parkedCars.add(car);
 
         // Notify the owner if parking is full
-        if (parkedCars.size() == MAX_CAPACITY) {
+        if (parkedCars.size() == maxCapacity) {
             for (Notification observer : notifications) {
                 observer.notify("Parking Lot full");
             }
@@ -33,7 +43,7 @@ public class ParkingLot {
         parkedCars.remove(car);
 
         // Notify the owner if the parking area is available
-        if (parkedCars.size() == (MAX_CAPACITY-1)) {
+        if (parkedCars.size() == (maxCapacity - 1)) {
             for (Notification observer : notifications) {
                 observer.notify("Parking Lot is Available");
             }
@@ -41,8 +51,8 @@ public class ParkingLot {
         return true;
     }
 
-    private boolean checkSlotAvailability() {
-        return parkedCars.size() < MAX_CAPACITY;
+    public boolean isSlotAvailable() {
+        return parkedCars.size() < maxCapacity;
     }
 
     public void addObserver(Notification observer) {
