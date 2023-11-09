@@ -20,3 +20,10 @@ As a parking lot owner I would like to be notified when the parking lot becomes 
 Requirement 5 - Notify road traffic cop
 
 As a parking lot security, I want to know when the lot is full, so that I can redirect incoming traffic away from the lot.
+
+Requirement 6
+
+As a parking lot owner I would like to be notified when the parking lot is available for parking again so that I can remove the sign.
+
+As a parking lot security, I would like to be notified when the parking lot is available for parking again so that I can stop redirecting traffic away from the lot.
+
